@@ -7,6 +7,8 @@ specifiers:
   css-loader: ^6.5.1
   eslint: ^8.7.0
   file-loader: ^6.2.0
+  handlebars: ^4.7.7
+  handlebars-loader: ^1.7.1
   html-loader: ^3.1.0
   html-webpack-plugin: ^5.5.0
   reload-html-webpack-plugin: ^0.1.2
@@ -14,6 +16,7 @@ specifiers:
   sass: ^1.49.0
   sass-loader: ^12.4.0
   style-loader: ^3.3.1
+  url-loader: ^4.1.1
   webpack: ^5.67.0
   webpack-cli: ^4.9.2
   webpack-dev-server: ^4.7.3
@@ -25,6 +28,8 @@ devDependencies:
   css-loader: 6.5.1_webpack@5.67.0
   eslint: 8.7.0
   file-loader: 6.2.0_webpack@5.67.0
+  handlebars: 4.7.7
+  handlebars-loader: 1.7.1_handlebars@4.7.7
   html-loader: 3.1.0_webpack@5.67.0
   html-webpack-plugin: 5.5.0_webpack@5.67.0
   reload-html-webpack-plugin: 0.1.2
@@ -32,6 +37,7 @@ devDependencies:
   sass: 1.49.0
   sass-loader: 12.4.0_sass@1.49.0+webpack@5.67.0
   style-loader: 3.3.1_webpack@5.67.0
+  url-loader: 4.1.1_file-loader@6.2.0+webpack@5.67.0
   webpack: 5.67.0_webpack-cli@4.9.2
   webpack-cli: 4.9.2_4df292f2573ba77e77217391b9684f0a
   webpack-dev-server: 4.7.3_webpack-cli@4.9.2+webpack@5.67.0
@@ -571,6 +577,10 @@ packages:
     resolution: {integrity: sha1-8zshWfBTKj8xB6JywMz70a0peco=}
     dev: true
 
+  /async/0.2.10:
+    resolution: {integrity: sha1-trvgsGdLnXGXCMo43owjfLUmw9E=}
+    dev: true
+
   /async/2.6.3:
     resolution: {integrity: sha512-zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==}
     dependencies:
@@ -603,6 +613,10 @@ packages:
     resolution: {integrity: sha1-QIZrnhueC1W0gYlDEeaPr/rrxSI=}
     dependencies:
       callsite: 1.0.0
+    dev: true
+
+  /big.js/3.2.0:
+    resolution: {integrity: sha512-+hN/Zh2D08Mx65pZ/4g5bsmNiZUuChDiQfTUQ7qJr4/kuopCr88xZsAXv6mBoZEsUI4OuGHlX59qE94K2mMW8Q==}
     dev: true
 
   /big.js/5.2.2:
@@ -1141,6 +1155,11 @@ packages:
     resolution: {integrity: sha512-jRAoneRdSxnpRHO0ANpnEUtQHXxlgfVjrLOnQSisw1ryjXJXvS0pJaR/v2B7S++/tRjgEDp4Sjn5nmgb6uTySw==}
     dev: true
 
+  /emojis-list/2.1.0:
+    resolution: {integrity: sha1-TapNnbAPmBmIDHn6RXrlsJof04k=}
+    engines: {node: '>= 0.10'}
+    dev: true
+
   /emojis-list/3.0.0:
     resolution: {integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==}
     engines: {node: '>= 4'}
@@ -1523,6 +1542,10 @@ packages:
     resolution: {integrity: sha512-On2N+BpYJ15xIC974QNVuYGMOlEVt4s0EOI3wwMqOmK1fdDY+FN/zltPV8vosq4ad4c/gJ1KHScUn/6AWIgiow==}
     dev: true
 
+  /fastparse/1.1.2:
+    resolution: {integrity: sha512-483XLLxTVIwWK3QTrMGRqUfUpoOs/0hbQrl2oz4J0pAcm3A3bu84wxTFqGqkJzewCLdME38xJLJAxBABfQT8sQ==}
+    dev: true
+
   /fastq/1.13.0:
     resolution: {integrity: sha512-YpkpUnK8od0o1hmeSc7UUs/eB/vIPWJYjKck2QKIzAf71Vm1AAQ3EbuZB3g2JIy+pg+ERD0vqI79KyZiB2e2Nw==}
     dependencies:
@@ -1743,6 +1766,31 @@ packages:
 
   /handle-thing/2.0.1:
     resolution: {integrity: sha512-9Qn4yBxelxoh2Ow62nP+Ka/kMnOXRi8BXnRaUwezLNhqelnN49xKz4F/dPP8OYLxLxq6JDtZb2i9XznUQbNPTg==}
+    dev: true
+
+  /handlebars-loader/1.7.1_handlebars@4.7.7:
+    resolution: {integrity: sha512-Q+Z/hDPQzU8ZTlVnAe/0T1LHABlyhL7opNcSKcQDhmUXK2ByGTqib1Z2Tfv4Ic50WqDcLFWQcOb3mhjcBRbscQ==}
+    peerDependencies:
+      handlebars: '>= 1.3.0 < 5'
+    dependencies:
+      async: 0.2.10
+      fastparse: 1.1.2
+      handlebars: 4.7.7
+      loader-utils: 1.0.4
+      object-assign: 4.1.1
+    dev: true
+
+  /handlebars/4.7.7:
+    resolution: {integrity: sha512-aAcXm5OAfE/8IXkcZvCepKU3VzW1/39Fb5ZuqMtgI/hT8X2YgoMvBY5dLhq/cpOvw7Lk1nK/UF71aLG/ZnVYRA==}
+    engines: {node: '>=0.4.7'}
+    hasBin: true
+    dependencies:
+      minimist: 1.2.5
+      neo-async: 2.6.2
+      source-map: 0.6.1
+      wordwrap: 1.0.0
+    optionalDependencies:
+      uglify-js: 3.15.0
     dev: true
 
   /has-bigints/1.0.1:
@@ -2235,6 +2283,11 @@ packages:
     deprecated: Please use the native JSON object instead of JSON 3
     dev: true
 
+  /json5/0.5.1:
+    resolution: {integrity: sha1-Hq3nrMASA0rYTiOWdn6tn6VJWCE=}
+    hasBin: true
+    dev: true
+
   /json5/1.0.1:
     resolution: {integrity: sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow==}
     hasBin: true
@@ -2271,6 +2324,15 @@ packages:
   /loader-runner/4.2.0:
     resolution: {integrity: sha512-92+huvxMvYlMzMt0iIOukcwYBFpkYJdpl2xsZ7LrlayO7E8SOv+JJUEK17B/dJIHAOLMfh2dZZ/Y18WgmGtYNw==}
     engines: {node: '>=6.11.5'}
+    dev: true
+
+  /loader-utils/1.0.4:
+    resolution: {integrity: sha1-E/Vhl/FSOjBYkSSLTHJEVAhIQmw=}
+    engines: {node: '>=4.0.0'}
+    dependencies:
+      big.js: 3.2.0
+      emojis-list: 2.1.0
+      json5: 0.5.1
     dev: true
 
   /loader-utils/2.0.2:
@@ -3535,6 +3597,14 @@ packages:
       mime-types: 2.1.34
     dev: true
 
+  /uglify-js/3.15.0:
+    resolution: {integrity: sha512-x+xdeDWq7FiORDvyIJ0q/waWd4PhjBNOm5dQUOq2AKC0IEjxOS66Ha9tctiVDGcRQuh69K7fgU5oRuTK4cysSg==}
+    engines: {node: '>=0.8.0'}
+    hasBin: true
+    requiresBuild: true
+    dev: true
+    optional: true
+
   /ultron/1.0.2:
     resolution: {integrity: sha1-rOEWq1V80Zc4ak6I9GhTeMiy5Po=}
     dev: true
@@ -3557,6 +3627,23 @@ packages:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
     dependencies:
       punycode: 2.1.1
+    dev: true
+
+  /url-loader/4.1.1_file-loader@6.2.0+webpack@5.67.0:
+    resolution: {integrity: sha512-3BTV812+AVHHOJQO8O5MkWgZ5aosP7GnROJwvzLS9hWDj00lZ6Z0wNak423Lp9PBZN05N+Jk/N5Si8jRAlGyWA==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      file-loader: '*'
+      webpack: ^4.0.0 || ^5.0.0
+    peerDependenciesMeta:
+      file-loader:
+        optional: true
+    dependencies:
+      file-loader: 6.2.0_webpack@5.67.0
+      loader-utils: 2.0.2
+      mime-types: 2.1.34
+      schema-utils: 3.1.1
+      webpack: 5.67.0_webpack-cli@4.9.2
     dev: true
 
   /util-deprecate/1.0.2:
@@ -3793,6 +3880,10 @@ packages:
   /word-wrap/1.2.3:
     resolution: {integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /wordwrap/1.0.0:
+    resolution: {integrity: sha1-J1hIEIkUVqQXHI0CJkQa3pDLyus=}
     dev: true
 
   /wrappy/1.0.2:

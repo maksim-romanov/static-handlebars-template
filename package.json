@@ -19,6 +19,8 @@
     "css-loader": "^6.5.1",
     "eslint": "^8.7.0",
     "file-loader": "^6.2.0",
+    "handlebars": "^4.7.7",
+    "handlebars-loader": "^1.7.1",
     "html-loader": "^3.1.0",
     "html-webpack-plugin": "^5.5.0",
     "reload-html-webpack-plugin": "^0.1.2",

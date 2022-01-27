@@ -1,3 +1,12 @@
 import './styles/index.sass';
 
-console.log('!!!!!!!! 2');
+// import Handlebars from 'handlebars';
+
+import handleMarsMain from './views/index.hbs';
+
+function App() {
+  const rootContaoner = document.getElementById('root');
+  rootContaoner.innerHTML = handleMarsMain();
+}
+
+App();
