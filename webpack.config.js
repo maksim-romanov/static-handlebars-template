@@ -29,6 +29,10 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff)$/,
         type: 'asset/resource'
+      },
+      {
+        test: /\.hbs$/,
+        use: ['handlebars-loader']
       }
       // {
       //   test: /\.html$/i,
@@ -52,6 +56,7 @@ module.exports = {
       // }
     ]
   },
+  resolve: { alias: { handlebars: 'handlebars/dist/handlebars.min.js' } },
   plugins: [
     new CleanWebpackPlugin(),
     // new HotModuleReplacementPlugin(),
