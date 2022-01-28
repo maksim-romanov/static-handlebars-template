@@ -34,7 +34,16 @@
   line-height: 142% // or 24px
   letter-spacing: -0.01em
 
-@media (min-width: $layout-breakpoint-small)
+.text-black
+  color: $black // default color
+
+.text-white
+  color: $white
+
+.text-center
+  text-align: center
+
+@media (max-width: $layout-breakpoint-md)
   .h1
     font-size: 34px
     line-height: 112% // or 38px
