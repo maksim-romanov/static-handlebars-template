@@ -1,0 +1,61 @@
+.h1,.h2,.h3,.h4,.p-big,.p-normal,.p-small
+  font-family: Roboto
+  font-style: normal
+  color: $black // default color
+
+.h1 
+  font-weight: bold
+  letter-spacing: 0.02em
+  font-size: 96px
+  line-height: 109% // or 105px
+
+.h2
+  font-weight: bold
+  font-size: 59px
+  line-height: 124% // or 73px
+
+.h3
+  font-weight: 500
+  font-size: 35px
+  line-height: 122% // or 43px
+
+.p-big
+  font-weight: bold
+  font-size: 23px
+  line-height: 122% // identical to box height, or 28px
+
+.p-normal
+  font-weight: normal
+  font-size: 20px
+  line-height: 142% // or 28px 
+
+.p-small
+  font-size: 17px
+  line-height: 142% // or 24px
+  letter-spacing: -0.01em
+
+@media (min-width: $layout-breakpoint-small)
+  .h1
+    font-size: 34px
+    line-height: 112% // or 38px
+
+  .h2
+    font-size: 34px
+    line-height: 112% // or 38px
+
+  .h3 
+    font-size: 23px
+    line-height: 120% // identical to box height, or 28px
+    letter-spacing: 0.04em
+
+  .p-big
+    font-size: 16px
+    line-height: 142%
+
+  .p-normal
+    font-size: 16px
+    line-height: 142%
+
+  .p-small
+    font-size: 16px
+    line-height: 142% // identical to box height, or 23px
