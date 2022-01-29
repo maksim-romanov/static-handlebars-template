@@ -1,9 +1,9 @@
 import './styles/index.sass';
 
-import handleMarsMain from './views/index.hbs';
+// import handleMarsMain from './views/index.hbs';
 
-(function App() {
-  const rootContaoner = document.getElementById('root');
+// (function App() {
+//   const rootContaoner = document.getElementById('root');
 
-  rootContaoner.innerHTML = handleMarsMain();
-})();
+//   rootContaoner.innerHTML = handleMarsMain();
+// })();
