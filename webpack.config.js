@@ -11,10 +11,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: './index.js',
   mode: 'development',
-  devServer: {
-    port: 9000,
-    hot: false
-  },
+  devServer: { port: 9000, hot: false },
   output: {
     filename: '[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
@@ -24,11 +21,7 @@ module.exports = {
     rules: [
       {
         test: /\.s[ac]ss$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader'
-        ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff)$/,
@@ -43,16 +36,14 @@ module.exports = {
   resolve: { alias: { handlebars: 'handlebars/dist/handlebars.min.js' } },
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({ filename: '[contenthash].css' }),
     new HtmlWebpackPlugin({ filename: 'index.html', template: './pages/index.hbs' }),
     new HtmlWebpackPlugin({ filename: 'feedback.html', template: './pages/feedback.hbs' }),
     new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'src/assets/favicon'),
-          to: path.resolve(__dirname, 'dist/assets/favicon')
-        }
-      ]
+      patterns: [{
+        from: path.resolve(__dirname, 'src/assets'),
+        to: path.resolve(__dirname, 'dist/assets')
+      }]
     })
   ]
 };
