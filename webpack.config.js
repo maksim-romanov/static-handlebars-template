@@ -26,10 +26,6 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff)$/,
         type: 'asset/resource'
-      },
-      {
-        test: /\.hbs$/,
-        use: ['handlebars-loader']
       }
     ]
   },
@@ -37,8 +33,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: '[contenthash].css' }),
-    new HtmlWebpackPlugin({ filename: 'index.html', template: './pages/index.hbs' }),
-    new HtmlWebpackPlugin({ filename: 'feedback.html', template: './pages/feedback.hbs' }),
+    new HtmlWebpackPlugin({ filename: 'index.html', template: './index.html' }),
     new CopyWebpackPlugin({
       patterns: [{
         from: path.resolve(__dirname, 'src/assets'),
