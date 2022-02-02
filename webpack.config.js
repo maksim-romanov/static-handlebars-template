@@ -17,6 +17,12 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     assetModuleFilename: 'assets/images/[name][ext]'
   },
+  resolve: {
+    alias: {
+      utils: path.resolve(__dirname, 'src/javascript/utils/')
+      // Templates: path.resolve(__dirname, 'src/templates/'),
+    }
+  },
   module: {
     rules: [
       {
@@ -26,10 +32,13 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff)$/,
         type: 'asset/resource'
+      },
+      {
+        test: /\.html$/i,
+        loader: 'html-loader'
       }
     ]
   },
-  resolve: { alias: { handlebars: 'handlebars/dist/handlebars.min.js' } },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: '[contenthash].css' }),
