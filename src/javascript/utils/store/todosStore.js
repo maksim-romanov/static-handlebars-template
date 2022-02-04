@@ -5,8 +5,18 @@ import * as storeHelpers from './helpers';
 
 // }
 
+const INITIAL_STORE = {
+  filterKey: null,
+  collection: [{
+    id: 'initial',
+    title: 'initial',
+    isCompleted: false,
+    isDeleted: false
+  }]
+};
+
 const createStore = () => {
-  const TodosState = new storeHelpers.State({ collection: [{ id: 'initial', title: 'initial', isCompleted: false }] });
+  const TodosState = new storeHelpers.State({ ...INITIAL_STORE });
   TodosState.addObserver(new storeHelpers.Logger('TodosState'));
 
   const addTodo = (todo) => {
@@ -39,10 +49,17 @@ const createStore = () => {
     });
   };
 
+  const changeFilterkey = (filterKey) => {
+    const todos = TodosState.get();
+
+    TodosState.update({ ...todos, filterKey });
+  };
+
   return ({
     addTodo,
     deleteTodo,
     completeTodoToogle,
+    changeFilterkey,
     state: TodosState
   });
 };

@@ -23,9 +23,17 @@ class TodoItems extends storeHelpers.Observer {
     return TodoItem({ todoItem, onDelete: this.onDelete, onComplete: this.onComplete });
   }
 
-  renderTodoItems(todoItems) {
-    return todoItems
-      .filter((todoItem) => !todoItem.isDeleted)
+  renderTodoItems({ collection, filterKey }) {
+    const filterByKey = (collectionItem) => {
+      if (filterKey === 'completed') return collectionItem.isCompleted;
+      if (filterKey === 'deleted') return collectionItem.isDeleted;
+      if (filterKey === 'all') return true;
+
+      return !collectionItem.isDeleted;
+    };
+
+    return collection
+      .filter(filterByKey)
       .map(this.renderTodoItem.bind(this));
   }
 
@@ -37,7 +45,7 @@ class TodoItems extends storeHelpers.Observer {
 
   update(todos) {
     document.getElementById('todo-list').innerHTML = '';
-    babosh.render(this.render(todos.collection), document.getElementById('todo-list'));
+    babosh.render(this.render(todos), document.getElementById('todo-list'));
   }
 }
 
