@@ -5,13 +5,25 @@ function TodoItem({
   onDelete,
   onComplete
 }) {
-  const completeHandler = () => onComplete(todoItem.id);
-  const deleteHandler = () => onDelete(todoItem.id);
-
   const renderDeleteButton = () => {
-    if (todoItem.isDeleted) return babosh.createElement('span', { classList: ['danger'] }, '\t deleted');
+    if (todoItem.isDeleted) return (
+      babosh.createElement(
+        'span',
+        { classList: ['danger'] },
+        '\t deleted'
+      )
+    );
 
-    return babosh.createElement('button', { type: 'button', onclick: deleteHandler }, 'delete');
+    return (
+      babosh.createElement(
+        'button',
+        {
+          type: 'button',
+          onclick: () => onDelete(todoItem.id)
+        },
+        'delete'
+      )
+    );
   };
 
   return (
@@ -21,7 +33,7 @@ function TodoItem({
       babosh.createElement(
         'input', {
           type: 'checkbox',
-          onclick: completeHandler,
+          onclick: () => onComplete(todoItem.id),
           disabled: todoItem.isDeleted,
           checked: todoItem.isCompleted
         }

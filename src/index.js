@@ -11,8 +11,10 @@ import todosStore from './javascript/utils/store/todosStore';
 const startApp = () => {
   const todos = todosStore.state.get();
 
-  const renderTodoForm = () => TodoForm({ onSubmit: todosStore.addTodo });
-  babosh.render(renderTodoForm(), document.getElementById('todo-form'));
+  babosh.render(
+    TodoForm({ onSubmit: todosStore.addTodo }),
+    document.getElementById('todo-form')
+  );
 
   const todoItems = new TodoItems({
     todoItems: todos,
