@@ -1,13 +1,11 @@
 import './styles/index.sass';
 
 import * as babosh from 'utils/babosh';
-import * as storeHelpers from 'utils/store/helpers';
 
+import TodoCounter from './javascript/components/TodoCounter';
 import TodoForm from './javascript/components/TodoForm';
 import TodoItems from './javascript/components/TodoItems';
 import todosStore from './javascript/utils/store/todosStore';
-
-// const appNode = document.getElementById('app');
 
 const startApp = () => {
   const todos = todosStore.state.get();
@@ -22,7 +20,8 @@ const startApp = () => {
   });
   todosStore.state.addObserver(todoItems);
 
-  todosStore.state.addObserver(new storeHelpers.Logger('TodosState'));
+  const todoCounter = new TodoCounter({ todoItems: todos });
+  todosStore.state.addObserver(todoCounter);
 };
 
 startApp();

@@ -1,7 +1,13 @@
 import * as storeHelpers from './helpers';
 
+// class TodosStore extends storeHelpers.State {
+//   // constructor() {}
+
+// }
+
 const createStore = () => {
   const TodosState = new storeHelpers.State([{ id: 'initial', title: 'initial', isCompleted: false }]);
+  TodosState.addObserver(new storeHelpers.Logger('TodosState'));
 
   const addTodo = (todo) => {
     const todos = TodosState.get();
@@ -21,7 +27,6 @@ const createStore = () => {
   };
 
   const completeTodoToogle = (todoId) => {
-    console.log('!', todoId);
     const todos = TodosState.get();
 
     TodosState.update(
