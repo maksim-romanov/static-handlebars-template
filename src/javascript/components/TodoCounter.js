@@ -27,9 +27,9 @@ class TodoCounter extends storeHelpers.Observer {
     );
   }
 
-  update(todoItems) {
+  update(todos) {
     document.getElementById('todo-counter').innerHTML = '';
-    babosh.render(this.render(todoItems), document.getElementById('todo-counter'));
+    babosh.render(this.render(todos.collection), document.getElementById('todo-counter'));
   }
 }
 

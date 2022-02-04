@@ -1,6 +1,7 @@
 module.exports = {
   env: { node: true },
-  extends: ['@jetrockets/eslint-config-base']
+  extends: ['@jetrockets/eslint-config-base'],
+  rules: { 'newline-destructuring/newline': 0 }
 };
 
 

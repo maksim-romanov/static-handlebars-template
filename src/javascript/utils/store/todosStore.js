@@ -6,35 +6,37 @@ import * as storeHelpers from './helpers';
 // }
 
 const createStore = () => {
-  const TodosState = new storeHelpers.State([{ id: 'initial', title: 'initial', isCompleted: false }]);
+  const TodosState = new storeHelpers.State({ collection: [{ id: 'initial', title: 'initial', isCompleted: false }] });
   TodosState.addObserver(new storeHelpers.Logger('TodosState'));
 
   const addTodo = (todo) => {
-    const todos = TodosState.get();
+    const { collection, ...rest } = TodosState.get();
 
-    TodosState.update([...todos, todo]);
+    TodosState.update({ ...rest, collection: [...collection, todo] });
   };
 
   const deleteTodo = (todoId) => {
-    const todos = TodosState.get();
+    const { collection, ...rest } = TodosState.get();
 
-    TodosState.update(
-      todos.map((todo) => {
+    TodosState.update({
+      ...rest,
+      collection: collection.map((todo) => {
         if (todo.id == todoId) return ({ ...todo, isDeleted: true });
         return todo;
       })
-    );
+    });
   };
 
   const completeTodoToogle = (todoId) => {
-    const todos = TodosState.get();
+    const { collection, ...rest } = TodosState.get();
 
-    TodosState.update(
-      todos.map((todo) => {
+    TodosState.update({
+      ...rest,
+      collection: collection.map((todo) => {
         if (todo.id == todoId) return ({ ...todo, isCompleted: !todo.isCompleted });
         return todo;
       })
-    );
+    });
   };
 
   return ({

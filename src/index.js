@@ -8,19 +8,21 @@ import TodoItems from './javascript/components/TodoItems';
 import todosStore from './javascript/utils/store/todosStore';
 
 const startApp = () => {
-  const todos = todosStore.state.get();
+  const { collection } = todosStore.state.get();
+
+  console.log('collection', collection);
 
   const renderTodoForm = () => TodoForm({ onSubmit: todosStore.addTodo });
   babosh.render(renderTodoForm(), document.getElementById('todo-form'));
 
   const todoItems = new TodoItems({
-    todoItems: todos,
+    todoItems: collection,
     onDelete: todosStore.deleteTodo,
     onComplete: todosStore.completeTodoToogle
   });
   todosStore.state.addObserver(todoItems);
 
-  const todoCounter = new TodoCounter({ todoItems: todos });
+  const todoCounter = new TodoCounter({ todoItems: collection });
   todosStore.state.addObserver(todoCounter);
 };
 

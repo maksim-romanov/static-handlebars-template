@@ -35,9 +35,9 @@ class TodoItems extends storeHelpers.Observer {
     return babosh.createElement('ul', {}, ...this.renderTodoItems(todos));
   }
 
-  update(data) {
+  update(todos) {
     document.getElementById('todo-list').innerHTML = '';
-    babosh.render(this.render(data), document.getElementById('todo-list'));
+    babosh.render(this.render(todos.collection), document.getElementById('todo-list'));
   }
 }
 
