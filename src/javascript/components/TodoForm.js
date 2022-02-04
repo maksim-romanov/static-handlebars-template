@@ -1,4 +1,4 @@
-import { Observer, generateUUID } from 'utils';
+import { Observer, generateUUID, createChild } from 'utils';
 
 const createTodo = ({ title }) => ({ id: generateUUID(), title, isCompleted: false });
 
@@ -13,9 +13,9 @@ const renderForm = () => (`
 `);
 
 class TodoForm extends Observer {
-  constructor({ state, node }) {
+  constructor({ state, parentNode }) {
     super();
-    this.node = node;
+    this.node = createChild(parentNode);
     this.state = state;
 
     this.render();
