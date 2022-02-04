@@ -7,8 +7,8 @@ const createTextElement = (text) => ({
 });
 
 export const createElement = (type, props = {}, ...children) => {
-  const childrenResolver = (children) => {
-    if (typeof children === 'object') return children;
+  const childrenResolver = (child) => {
+    if (typeof child === 'object') return child;
     return createTextElement(children);
   };
 
@@ -34,7 +34,10 @@ export const render = (element, container) => {
     .filter((key) => key !== 'children') // ток проперти
     .forEach((name) => { domElement[name] = element.props[name]; }); // назначаем проперти
 
-  element.props.children.forEach((child) => render(child, domElement));
+  element.props.children.forEach((child) => {
+    if(Array.isArray(child)) return render(child[0], domElement);
+    render(child, domElement);
+  });
 
   container.appendChild(domElement);
 };

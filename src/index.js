@@ -1,37 +1,28 @@
 import './styles/index.sass';
 
 import * as babosh from 'utils/babosh';
-import * as store from 'utils/store';
+import * as storeHelpers from 'utils/store/helpers';
 
-import TodoFormComponent from './javascript/components/TodoForm';
+import TodoForm from './javascript/components/TodoForm';
+import TodoItems from './javascript/components/TodoItems';
+import todosStore from './javascript/utils/store/todosStore';
 
-const appNode = document.getElementById('app');
+// const appNode = document.getElementById('app');
 
-// const todoFormNode = document.getElementById('todo-form');
-// const todosListNode = document.getElementById('todo-list');
+const startApp = () => {
+  const todos = todosStore.state.get();
 
-const App = () => {
-  const AppState = new store.State({ todos: [] });
-  AppState.addObserver(new store.Logger('AppState'));
+  const renderTodoForm = () => TodoForm({ onSubmit: todosStore.addTodo });
+  babosh.render(renderTodoForm(), document.getElementById('todo-form'));
 
-  AppState.update({ todos: [{ id: '1', title: 'test' }] });
+  const todoItems = new TodoItems({
+    todoItems: todos,
+    onDelete: todosStore.deleteTodo,
+    onComplete: todosStore.completeTodoToogle
+  });
+  todosStore.state.addObserver(todoItems);
 
-  const app = babosh.createElement(
-    'div',
-    { class: 'main-class', id: 'jopa' },
-    new TodoFormComponent({ state: AppState }).render()
-    // babosh.createElement('span', null, 'hello mir')
-  );
-
-  console.log('app', app);
-
-  babosh.render(app, appNode);
-
-  // const todoForm = new components.TodoForm({ state: AppState, parentNode: appNode });
-  // const listItems = new components.TodosList({ state: AppState, parentNode: appNode });
-
-  // AppState.addObserver(todoForm);
-  // AppState.addObserver(listItems);
+  todosStore.state.addObserver(new storeHelpers.Logger('TodosState'));
 };
 
-App();
+startApp();

@@ -1,5 +1,3 @@
-import Logger from "./Logger";
-import Observer from "./Observer";
-import State from "./State";
+import todosStore from './todosStore';
 
-export { Logger, Observer, State }
+export { todosStore };
