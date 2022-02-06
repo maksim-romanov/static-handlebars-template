@@ -5,14 +5,20 @@ class Subject {
 
   addObserver(observer) {
     this.observers = [...this.observers, observer];
+    const observerIndex = this.observers.length - 1;
+
+    return () => {
+      this.removerObserverByIndex(observerIndex);
+    };
   }
 
-  removerObserver(observer) {
-    this.observers = this.observers.filter((_observer) => _observer !== observer);
+
+  removerObserverByIndex(index) {
+    this.observers.splice(index, 1);
   }
 
   notify(data) {
-    this.observers.forEach((observer) => observer.update(data));
+    this.observers.forEach((observer) => observer(data));
   }
 }
 

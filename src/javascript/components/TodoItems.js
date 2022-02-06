@@ -1,29 +1,11 @@
 import * as babosh from 'utils/babosh';
-import * as storeHelpers from 'utils/store/helpers';
-
 
 import TodoItem from './TodoItem';
 
-class TodoItems extends storeHelpers.Observer {
-  constructor({
-    todoItems = [],
-    onDelete,
-    onComplete
-  }) {
-    super();
+function TodoItems({ todos, onDelete, onComplete }) {
+  const renderTodoItem = (todoItem) => TodoItem({ todoItem, onDelete, onComplete });
 
-    this.todoItems = todoItems;
-    this.onDelete = onDelete;
-    this.onComplete = onComplete;
-
-    babosh.render(this.render(todoItems), document.getElementById('todo-list'));
-  }
-
-  renderTodoItem(todoItem) {
-    return TodoItem({ todoItem, onDelete: this.onDelete, onComplete: this.onComplete });
-  }
-
-  renderTodoItems({ collection, filterKey }) {
+  const renderTodoItems = ({ collection, filterKey }) => {
     const filterByKey = (collectionItem) => {
       if (filterKey === 'completed') return collectionItem.isCompleted;
       if (filterKey === 'deleted') return collectionItem.isDeleted;
@@ -34,19 +16,10 @@ class TodoItems extends storeHelpers.Observer {
 
     return collection
       .filter(filterByKey)
-      .map(this.renderTodoItem.bind(this));
-  }
+      .map(renderTodoItem);
+  };
 
-  render(todos = this.todoItems) {
-    // console.log('this.todoItems', this.todoItems, this.renderTodoItems(this.todoItems));
-
-    return babosh.createElement('ul', {}, ...this.renderTodoItems(todos));
-  }
-
-  update(todos) {
-    document.getElementById('todo-list').innerHTML = '';
-    babosh.render(this.render(todos), document.getElementById('todo-list'));
-  }
+  return babosh.createElement('ul', {}, ...renderTodoItems(todos));
 }
 
 export default TodoItems;

@@ -1,33 +1,57 @@
 import './styles/index.sass';
 
-import * as babosh from 'utils/babosh';
 
-import TodoCounter from './javascript/components/TodoCounter';
-import TodoFilters from './javascript/components/TodoFilters';
-import TodoForm from './javascript/components/TodoForm';
-import TodoItems from './javascript/components/TodoItems';
-import todosStore from './javascript/utils/store/todosStore';
+import TodoCounter from 'components/TodoCounter';
+import TodoFilters from 'components/TodoFilters';
+import TodoForm from 'components/TodoForm';
+import TodoItems from 'components/TodoItems';
+import * as babosh from 'utils/babosh';
+import todosStore from 'utils/store/todosStore';
+
+const todoListNode = document.getElementById('todo-list');
+const todoCounterNode = document.getElementById('todo-counter');
+const todoFilterNode = document.getElementById('todo-filters');
 
 const startApp = () => {
-  const todos = todosStore.state.get();
-
-  babosh.render(
+  const renderTodoForm = () => babosh.render(
     TodoForm({ onSubmit: todosStore.addTodo }),
     document.getElementById('todo-form')
   );
 
-  const todoItems = new TodoItems({
-    todoItems: todos,
-    onDelete: todosStore.deleteTodo,
-    onComplete: todosStore.completeTodoToogle
-  });
-  todosStore.state.addObserver(todoItems);
+  const renderTodoItems = (todos) => {
+    todoListNode.innerHTML = '';
 
-  const todoCounter = new TodoCounter({ todoItems: todos.collection });
-  todosStore.state.addObserver(todoCounter);
+    babosh.render(
+      TodoItems({
+        todos,
+        onDelete: todosStore.deleteTodo,
+        onComplete: todosStore.completeTodoToogle
+      }),
+      todoListNode
+    );
+  };
 
-  const todoFilters = new TodoFilters({ onChange: todosStore.changeFilterkey, todoItems: todos });
-  todosStore.state.addObserver(todoFilters);
+  const renderCounter = (todos) => {
+    todoCounterNode.innerHTML = '';
+
+    babosh.render(TodoCounter({ todos }), todoCounterNode);
+  };
+
+  const renderTodoFilters = (todos) => {
+    todoFilterNode.innerHTML = '';
+
+    babosh.render(
+      TodoFilters({ todos, onChange: todosStore.changeFilterkey }),
+      todoFilterNode
+    );
+  };
+
+  renderTodoForm();
+  todosStore.state.addObserver(renderTodoItems);
+  todosStore.state.addObserver(renderCounter);
+  todosStore.state.addObserver(renderTodoFilters);
+
+  todosStore.state.update((v) => v);
 };
 
 startApp();

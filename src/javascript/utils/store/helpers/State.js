@@ -6,8 +6,8 @@ class State extends Subject {
     this.state = initialState;
   }
 
-  update(data = {}) {
-    this.state = data;
+  update(getState) {
+    this.state = getState(this.state);
     this.notify(this.state);
   }
 

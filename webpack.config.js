@@ -19,8 +19,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      utils: path.resolve(__dirname, 'src/javascript/utils/')
-      // Templates: path.resolve(__dirname, 'src/templates/'),
+      utils: path.resolve(__dirname, 'src/javascript/utils/'),
+      components: path.resolve(__dirname, 'src/javascript/components/')
     }
   },
   module: {

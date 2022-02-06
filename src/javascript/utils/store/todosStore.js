@@ -1,11 +1,7 @@
+import { createLogger } from '../logger';
 import * as storeHelpers from './helpers';
 
-// class TodosStore extends storeHelpers.State {
-//   // constructor() {}
-
-// }
-
-const INITIAL_STORE = {
+export const INITIAL_STORE = {
   filterKey: null,
   collection: [{
     id: 'initial',
@@ -16,44 +12,38 @@ const INITIAL_STORE = {
 };
 
 const createStore = () => {
-  const TodosState = new storeHelpers.State({ ...INITIAL_STORE });
-  TodosState.addObserver(new storeHelpers.Logger('TodosState'));
+  const TodosState = new storeHelpers.State(INITIAL_STORE);
 
   const addTodo = (todo) => {
-    const { collection, ...rest } = TodosState.get();
-
-    TodosState.update({ ...rest, collection: [...collection, todo] });
+    TodosState.update(({ collection, ...rest }) => ({
+      ...rest,
+      collection: [...collection, todo]
+    }));
   };
 
   const deleteTodo = (todoId) => {
-    const { collection, ...rest } = TodosState.get();
-
-    TodosState.update({
+    TodosState.update(({ collection, ...rest }) => ({
       ...rest,
       collection: collection.map((todo) => {
         if (todo.id == todoId) return ({ ...todo, isDeleted: true });
         return todo;
       })
-    });
+    }));
   };
 
   const completeTodoToogle = (todoId) => {
-    const { collection, ...rest } = TodosState.get();
-
-    TodosState.update({
+    TodosState.update(({ collection, ...rest }) => ({
       ...rest,
       collection: collection.map((todo) => {
         if (todo.id == todoId) return ({ ...todo, isCompleted: !todo.isCompleted });
         return todo;
       })
-    });
+    }));
   };
 
-  const changeFilterkey = (filterKey) => {
-    const todos = TodosState.get();
+  const changeFilterkey = (filterKey) => TodosState.update((todos) => ({ ...todos, filterKey }));
 
-    TodosState.update({ ...todos, filterKey });
-  };
+  TodosState.addObserver(createLogger('TodosState'));
 
   return ({
     addTodo,
