@@ -18,4 +18,20 @@ const addURLQueryParam = (key, value) => {
   window.history.pushState({ path: newurl }, '', newurl);
 };
 
-export { generateUUID, getURLQueryParams, addURLQueryParam };
+const localStore = {
+  saveValue: (key, value) => {
+    if (typeof value === 'object') {
+      window.localStorage.setItem(key, JSON.stringify(value));
+      return
+    }
+
+    window.localStorage.setItem(key, value);
+  },
+  getValue: (key) => {
+    const value = window.localStorage.getItem(key);
+
+    return JSON.parse(value);
+  }
+}
+
+export { generateUUID, getURLQueryParams, addURLQueryParam, localStore };

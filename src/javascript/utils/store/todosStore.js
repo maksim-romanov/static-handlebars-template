@@ -1,5 +1,8 @@
+import * as utils from 'utils/common';
+
 import { createLogger } from '../logger';
 import * as storeHelpers from './helpers';
+
 
 export const INITIAL_STORE = {
   filterKey: null,
@@ -11,8 +14,11 @@ export const INITIAL_STORE = {
   }]
 };
 
+const STORE_NAME = 'todosStore';
+
 const createStore = () => {
-  const TodosState = new storeHelpers.State(INITIAL_STORE);
+  const todosStoreLocalData = utils.localStore.getValue(STORE_NAME);
+  const TodosState = new storeHelpers.State(todosStoreLocalData || INITIAL_STORE);
 
   const addTodo = (todo) => {
     TodosState.update(({ collection, ...rest }) => ({
@@ -41,15 +47,27 @@ const createStore = () => {
     }));
   };
 
+  const deleteAllCompleted = () => {
+    TodosState.update(({ collection, ...rest }) => ({
+      ...rest,
+      collection: collection.map((todo) => {
+        if (todo.isCompleted) return ({ ...todo, isDeleted: true });
+        return todo;
+      })
+    }));
+  };
+
   const changeFilterkey = (filterKey) => TodosState.update((todos) => ({ ...todos, filterKey }));
 
-  TodosState.addObserver(createLogger('TodosState'));
+  TodosState.addObserver(createLogger(STORE_NAME));
+  TodosState.addObserver((data) => utils.localStore.saveValue(STORE_NAME, data));
 
   return ({
     addTodo,
     deleteTodo,
-    completeTodoToogle,
     changeFilterkey,
+    completeTodoToogle,
+    deleteAllCompleted,
     state: TodosState
   });
 };

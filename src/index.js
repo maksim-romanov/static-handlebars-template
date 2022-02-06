@@ -9,6 +9,7 @@ import todosStore from 'utils/store/todosStore';
 const todoListNode = document.getElementById('todo-list');
 const todoCounterNode = document.getElementById('todo-counter');
 const todoFilterNode = document.getElementById('todo-filters');
+const todoActionsNode = document.getElementById('todo-actions');
 
 const startApp = () => {
   const { filterKey } = utils.getURLQueryParams();
@@ -56,10 +57,23 @@ const startApp = () => {
     );
   };
 
+  const renderTodoActions = (todos) => {
+    todoActionsNode.innerHTML = '';
+
+    babosh.render(
+      components.TodoActions({
+        todos,
+        onDeleteCompleted: todosStore.deleteAllCompleted
+      }),
+      todoActionsNode
+    );
+  };
+
   renderTodoForm();
   todosStore.state.addObserver(renderTodoItems);
   todosStore.state.addObserver(renderCounter);
   todosStore.state.addObserver(renderTodoFilters);
+  todosStore.state.addObserver(renderTodoActions);
 
   todosStore.state.update((state) => ({ ...state, filterKey }));
 };

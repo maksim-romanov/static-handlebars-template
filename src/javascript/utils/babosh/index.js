@@ -22,6 +22,8 @@ export const createElement = (type, props = {}, ...children) => {
 };
 
 export const render = (element, container) => {
+  if (!element) return;
+
   const elementResolver = (el) => {
     if (el.type == 'TEXT_ELEMENT') return document.createTextNode('');
     return document.createElement(el.type);
