@@ -1,4 +1,6 @@
-import TodosList from "./TodosList"
+import TodoItems from "./TodoItems"
 import TodoForm from "./TodoForm"
+import TodoCounter from "./TodoCounter"
+import TodoFilters from "./TodoFilters"
 
-export { TodosList, TodoForm };
+export { TodoItems, TodoForm, TodoCounter, TodoFilters };

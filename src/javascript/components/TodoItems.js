@@ -8,7 +8,7 @@ function TodoItems({ todos, onDelete, onComplete }) {
   const renderTodoItems = ({ collection, filterKey }) => {
     const filterByKey = (collectionItem) => {
       if (filterKey === 'completed') return collectionItem.isCompleted;
-      if (filterKey === 'deleted') return collectionItem.isDeleted;
+      if (filterKey === 'active') return !collectionItem.isDeleted && !collectionItem.isCompleted;
       if (filterKey === 'all') return true;
 
       return !collectionItem.isDeleted;
