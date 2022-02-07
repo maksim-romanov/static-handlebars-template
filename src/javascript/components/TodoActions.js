@@ -18,7 +18,7 @@ function TodoActions({ todos, onDeleteCompleted }) {
       {},
       babosh.createElement(
         'button', { onclick: () => onDeleteCompleted() },
-        `all ${todos.collection.length}`
+        'clear completed'
       )
     )
   );

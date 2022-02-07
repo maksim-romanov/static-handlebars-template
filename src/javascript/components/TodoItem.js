@@ -29,7 +29,7 @@ function TodoItem({
   return (
     babosh.createElement(
       'li',
-      { id: todoItem.id },
+      {},
       babosh.createElement(
         'input', {
           type: 'checkbox',

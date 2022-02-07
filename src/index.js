@@ -4,7 +4,7 @@ import './styles/index.sass';
 import * as components from 'components';
 import * as babosh from 'utils/babosh';
 import * as utils from 'utils/common';
-import todosStore from 'utils/store/todosStore';
+import TodosStore from 'utils/store/todosStore';
 
 const todoListNode = document.getElementById('todo-list');
 const todoCounterNode = document.getElementById('todo-counter');
@@ -15,7 +15,10 @@ const startApp = () => {
   const { filterKey } = utils.getURLQueryParams();
 
   const renderTodoForm = () => babosh.render(
-    components.TodoForm({ onSubmit: todosStore.addTodo }),
+    components.TodoForm({
+      onSubmit: TodosStore.addTodo,
+      onAllComplete: TodosStore.allComplete
+    }),
     document.getElementById('todo-form')
   );
 
@@ -25,8 +28,8 @@ const startApp = () => {
     babosh.render(
       components.TodoItems({
         todos,
-        onDelete: todosStore.deleteTodo,
-        onComplete: todosStore.completeTodoToogle
+        onDelete: TodosStore.deleteTodo,
+        onComplete: TodosStore.completeTodoToogle
       }),
       todoListNode
     );
@@ -50,7 +53,7 @@ const startApp = () => {
         todos,
         onChange: (filterKey) => {
           utils.addURLQueryParam('filterKey', filterKey);
-          todosStore.changeFilterkey(filterKey);
+          TodosStore.changeFilterkey(filterKey);
         }
       }),
       todoFilterNode
@@ -63,19 +66,19 @@ const startApp = () => {
     babosh.render(
       components.TodoActions({
         todos,
-        onDeleteCompleted: todosStore.deleteAllCompleted
+        onDeleteCompleted: TodosStore.deleteAllCompleted
       }),
       todoActionsNode
     );
   };
 
   renderTodoForm();
-  todosStore.state.addObserver(renderTodoItems);
-  todosStore.state.addObserver(renderCounter);
-  todosStore.state.addObserver(renderTodoFilters);
-  todosStore.state.addObserver(renderTodoActions);
+  TodosStore.addObserver(renderTodoItems);
+  TodosStore.addObserver(renderCounter);
+  TodosStore.addObserver(renderTodoFilters);
+  TodosStore.addObserver(renderTodoActions);
 
-  todosStore.state.update((state) => ({ ...state, filterKey }));
+  TodosStore.update((state) => ({ ...state, filterKey }));
 };
 
 startApp();

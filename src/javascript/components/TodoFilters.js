@@ -1,12 +1,17 @@
 import * as babosh from 'utils/babosh';
 
 const getCompletedCount = (collection) => collection
+  .filter(({ isDeleted }) => !isDeleted)
   .filter(({ isCompleted }) => isCompleted)
   .length;
 
 const getActiveCount = (collection) => collection
   .filter(({ isDeleted }) => !isDeleted)
   .filter(({ isCompleted }) => !isCompleted)
+  .length;
+
+const getAllCount = (collection) => collection
+  .filter(({ isDeleted }) => !isDeleted)
   .length;
 
 function TodoFilters({ todos, onChange }) {
@@ -20,7 +25,7 @@ function TodoFilters({ todos, onChange }) {
           onclick: () => onChange('all'),
           classList: todos.filterKey == 'all' && ['active']
         },
-        `all ${todos.collection.length}`
+        `all ${getAllCount(todos.collection)}`
       ),
       babosh.createElement(
         'a', {
